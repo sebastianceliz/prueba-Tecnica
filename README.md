@@ -1,6 +1,6 @@
 # prueba-Tecnica
 
-Saludos , para correr el proyecto no es necesario crear la base de datos ya que está en la nube de AWS , solo preocuparse porque corra bien :s 
+Saludos , para correr el proyecto no es necesario crear la base de datos ya que está en la nube de AWS , solo preocuparse porque todo se ejecute correctamente :s 
 
 Usé gradle para las dependencias , el SDK de java es 17
 
