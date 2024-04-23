@@ -7,3 +7,5 @@ Usé gradle para las dependencias , el SDK de java es 17
 #notas adicionales : 
 el formato para la fecha de nacimiento es yyyy-mm-dd
 estoy utilizando JPA,mapstruct y lombok para el manejo de excepciones y anotaciones , espero le guste el proyecto.
+
+En caso haya algun problema o duda comunicarse conmigo  +51 958659659
