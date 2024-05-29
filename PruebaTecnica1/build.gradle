@@ -35,6 +35,8 @@ dependencies {
     implementation 'org.springframework:spring-context'
     compileOnly 'org.springframework.boot:spring-boot-devtools:3.1.1'
 
+    implementation 'org.glassfish.jersey.core:jersey-common:3.1.2'
+
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.springframework:spring-jdbc'
 }
