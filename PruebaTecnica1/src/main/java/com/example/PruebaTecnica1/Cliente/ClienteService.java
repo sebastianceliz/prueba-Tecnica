@@ -1,38 +1,35 @@
 package com.example.PruebaTecnica1.Cliente;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Component
 public class ClienteService {
-    private final ClienteStorage clientStorage;
-    private final ClientMapper clientMapper;
 
-    public void createClient(ClientDto clientDto) {
-        Cliente client = clientMapper.toEntity(clientDto);
-        clientStorage.save(client);
+    private final ClienteStorage clienteRepository;
+
+    public Flux<Cliente> findAll() {
+        return clienteRepository.findAll();
     }
 
-    public List<Cliente> getAllClientes() {
-        //llamar a todos los clientes con JPA
-        return clientStorage.findAll();
+    public Mono<Cliente> findById(UUID id) {
+        return clienteRepository.findById(id);
     }
 
-    public double calcularPromedioEdad(List<Cliente> clientes) {
-        //uso de stream para acceder a los atributos de lista de clientes
-        int totalEdades = clientes.stream()
-                .mapToInt(Cliente::getEdad)
-                .sum();
-        return (double) totalEdades / clientes.size();
+    public Mono<Cliente> save(Cliente cliente) {
+        return clienteRepository.save(cliente);
     }
 
-    public double calcularDesviacionEstandar(List<Cliente> clientes, double promedioEdad) {
-        double sumaDiferenciaCuadrado = clientes.stream()
-                .mapToDouble(cliente -> Math.pow(cliente.getEdad() - promedioEdad, 2))
-                .sum();
-        return Math.sqrt(sumaDiferenciaCuadrado / clientes.size());
+    public Mono<Void> deleteById(UUID id) {
+        return clienteRepository.deleteById(id);
     }
 }
