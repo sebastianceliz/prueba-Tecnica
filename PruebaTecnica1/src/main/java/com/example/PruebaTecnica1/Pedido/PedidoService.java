@@ -1,8 +1,10 @@
 package com.example.PruebaTecnica1.Pedido;
 
+import com.example.PruebaTecnica1.Cliente.Cliente;
+import com.example.PruebaTecnica1.Cliente.ClienteService;
 import com.example.PruebaTecnica1.Producto.Producto;
-import com.example.PruebaTecnica1.Producto.ProductoService;
 import com.example.PruebaTecnica1.Producto.ProductoStorage;
+import jakarta.ws.rs.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +20,7 @@ import java.util.stream.Collectors;
 public class PedidoService {
 
     private final PedidoStorage pedidoStorage;
-    private final ProductoService productoService;
+    private final ClienteService clienteService;
 
     private final ProductoStorage productoStorage;
 
@@ -36,7 +38,16 @@ public class PedidoService {
 
         List<UUID> uuidProductosIds = convertirAUUID(productosIds);
 
+        // Verificar si el cliente existe
+        Mono<Cliente> clienteMono = clienteService.findById(UUID.fromString(clienteId))
+                .switchIfEmpty(Mono.error(new NotFoundException("Cliente not found with ID: " + clienteId)));
+
         Flux<Producto> productosFlux = obtenerProductos(uuidProductosIds);
+
+        // Verificar si los productos existen
+        Flux<Producto> productosFlux1 = obtenerProductos(uuidProductosIds)
+                .switchIfEmpty(Mono.error(new NotFoundException("One or more products not found.")));
+
 
         Mono<Double> totalMono = calcularTotal(productosFlux);
 

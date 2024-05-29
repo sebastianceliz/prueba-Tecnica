@@ -1,8 +1,10 @@
+use prueba-tecnica
+
 db.createUser({
-  user: "root",
+  user: "admin",
   pwd: "sebas",
   roles: [
-    { role: "readWrite", db: "prueba" },
-    { role: "dbAdmin", db: "prueba" }
+    { role: "readWrite", db: "prueba-tecnica" },
+    { role: "dbAdmin", db: "prueba-tecnica" }
   ]
 });

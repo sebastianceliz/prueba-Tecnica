@@ -48,10 +48,12 @@ public class PedidoController {
 
 
     /*URL POST: http://localhost:8080/api/pedidos
-
     ejemplo body para create:
 
-
+    {
+  "clienteId": "febf4209-324f-4986-a0f6-fd1008607137",
+  "productosIds": ["1e767fad-4f36-40c6-9b4f-202110a40511","2aeb3bb8-764c-437e-bbe2-b33a3255b16d"]
+    }
 
      */
 
@@ -59,7 +61,7 @@ public class PedidoController {
     @PostMapping
     public Mono<ResponseEntity<Out<String>>> createPedido(@Valid @RequestBody CreatePedidoRequest createPedidoRequest) {
         return pedidoService.createPedido(createPedidoRequest.getClienteId(), createPedidoRequest.getProductosIds())
-                .then(OutCase.ok("Pedido creado correctamente", "OK"));
+                .then(OutCase.ok("Pedido creado correctamente", "Pedido creado correctamente"));
     }
 
 

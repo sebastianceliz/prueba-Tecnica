@@ -19,9 +19,9 @@ services:
     container_name: mongo
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: sebas
-      MONGO_INITDB_DATABASE: prueba
+      MONGO_INITDB_DATABASE: prueba-tecnica
     ports:
       - "27017:27017"
     volumes:
