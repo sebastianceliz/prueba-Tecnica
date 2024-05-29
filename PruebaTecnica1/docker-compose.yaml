@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:15.3-alpine3.18
+    container_name: prueba-tecnica
+    restart: always
+    environment:
+      POSTGRES_USER: sebas
+      POSTGRES_PASSWORD: sebas
+      POSTGRES_DB: prueba
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: sebas
+      MONGO_INITDB_DATABASE: prueba
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo:/data/db
+
+volumes:
+  postgres:
+  mongo:
