@@ -1,21 +1,27 @@
 # prueba-Tecnica
 
-Saludos , para correr el proyecto no es necesario crear la base de datos ya que está configurado para conectarse a la nube de AWS , solo preocuparse porque todo se compile correctamente :)
+Saludos , el proyecto está con java 17 y gradle , para levantar las base de datos se debe ingresar a la carpeta donde se encuentra docker-compose que es "PruebaTecnica1"  (ejemplo en consola : cd pruebatecnica1).
 
-Usé gradle para las dependencias , el SDK de java es 17
+El archivo properties esta configurado para conectarse a la bd, en todo caso revisar el docker-compose
 
-dentro del proyecto comenté algunas cosas para ayudar al testeo
+Luego ejecutar el comando " docker-compose up -d ", se generará las bases de datos en un contenedor, en caso no se cree la de mongo DB , levantar manualmente mongoDB  y ejecutar el siguiente comando: 
 
-Body para POST /creacliente :
-{
-    "nombre" : "joel",
-    "apellido" : "celiz",
-    "edad" : 50,
-    "fechaNacimiento" : "2001-04-22"
-}
+use prueba-tecnica
+db.createUser({
+  user: "admin",
+  pwd: "sebas",
+  roles: [
+    { role: "readWrite", db: "prueba-tecnica" },
+    { role: "dbAdmin", db: "prueba-tecnica" }
+  ]
+});
 
-#notas adicionales : 
-el formato para la fecha de nacimiento es yyyy-mm-dd
-estoy utilizando JPA,mapstruct y lombok para el manejo de excepciones y anotaciones , espero le guste el proyecto.
+Correr la clase main llamada "PruebaTecnica1Application" , una vez levantado el proyecto se setearan clientes y productos automaticamente en la bd de postgres gracias a flyway, para ver esa data ejecutar " http://localhost:8080/getAllProducts " y " http://localhost:8080/getAllClients " ya que se usaran los IDS para crear pedidos
 
-En caso haya algun problema o duda comunicarse conmigo  +51 958659659
+en el controlador PedidosController hay indicaciones para probar el CRUD de pedidos en mongoDB 
+
+para correr los test unitarios ejecutar ./gradlew test
+
+Cualquier duda o bloqueante comunicarse conmigo al 958659659
+
+
