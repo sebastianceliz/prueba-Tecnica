@@ -12,6 +12,8 @@ CREATE TABLE producto (
     nombre VARCHAR(255),
     precio DECIMAL(10, 2)
 );
-
+insert into producto (nombre,precio) values ('smarthphone',500);
+insert into producto (nombre,precio) values ('moto',5500);
+insert into producto (nombre,precio) values ('auto',78500);
 
 

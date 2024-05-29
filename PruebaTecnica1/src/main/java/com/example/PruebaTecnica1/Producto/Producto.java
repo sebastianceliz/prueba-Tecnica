@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.UUID;
@@ -26,5 +25,8 @@ public class Producto {
     private double precio;
 
     public Producto(String nombre, double precio) {
+    }
+
+    public Producto() {
     }
 }
