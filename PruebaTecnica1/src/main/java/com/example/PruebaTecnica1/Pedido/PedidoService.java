@@ -3,7 +3,6 @@ package com.example.PruebaTecnica1.Pedido;
 import com.example.PruebaTecnica1.Producto.Producto;
 import com.example.PruebaTecnica1.Producto.ProductoService;
 import com.example.PruebaTecnica1.Producto.ProductoStorage;
-import jakarta.ws.rs.BadRequestException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,14 +31,8 @@ public class PedidoService {
         return pedidoStorage.findById(id);
     }
 
+    @Transactional
     public Mono<Pedido> createPedido(String clienteId, List<String> productosIds) {
-        if (clienteId == null || clienteId.isEmpty()) {
-            return Mono.error(new BadRequestException("El clienteId no puede ser nulo o vacío"));
-        }
-        if (productosIds.isEmpty()) {
-            return Mono.error(new BadRequestException("La lista de productosIds no puede ser nula o vacía"));
-        }
-
 
         List<UUID> uuidProductosIds = convertirAUUID(productosIds);
 

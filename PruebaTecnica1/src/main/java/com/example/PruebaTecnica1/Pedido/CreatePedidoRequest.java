@@ -8,8 +8,8 @@ import java.util.List;
 
 @Data
 public class CreatePedidoRequest {
-    @NotNull(message = "el cliente no puede ser nulo")
+    @NotEmpty(message = "el cliente no puede ser nulo")
     private String clienteId;
-    @NotNull(message = "La lista de productos es obligatoria")
+    @NotEmpty(message = "La lista de productos es obligatoria")
     private List<String> productosIds;
 }

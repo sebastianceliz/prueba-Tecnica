@@ -3,15 +3,16 @@ package com.example.PruebaTecnica1.configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import reactor.core.publisher.Mono;
 
 public final class OutCase {
 
-  public static <T> ResponseEntity<Out<T>> ok(T data) {
-    var response = new Out<T>();
-    response.setData(data);
+  public static <T> Mono<ResponseEntity<Out<String>>> ok(T data, String successMessage) {
+    var response = new Out<String>();
+    response.setData(successMessage);
     response.setStatus(HttpStatus.OK.name());
-    response.setMessage("OK");
-    return ResponseEntity.ok(response);
+    response.setMessage(successMessage);
+    return Mono.just(ResponseEntity.ok(response));
   }
 
   public static <T> ResponseEntity<Out<T>> ok(String message) {
@@ -21,13 +22,6 @@ public final class OutCase {
     return ResponseEntity.ok().body(response);
   }
 
-  public static <T> ResponseEntity<Out<T>> ok(T data, String message) {
-    var response = new Out<T>();
-    response.setData(data);
-    response.setStatus(HttpStatus.OK.name());
-    response.setMessage(message);
-    return ResponseEntity.ok(response);
-  }
 
   public static ResponseEntity<Out<Void>> created(String message) {
     var response = new Out<Void>();
